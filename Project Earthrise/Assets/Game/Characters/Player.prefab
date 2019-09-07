@@ -129,6 +129,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2790740020660750189, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 326659638172287543, guid: 1df8045c6b2650f4da17d8f570e983c9,
         type: 3}
       propertyPath: weaponDamage
@@ -201,8 +206,7 @@ PrefabInstance:
         type: 3}
       propertyPath: levelUpParticleEffect
       value: 
-      objectReference: {fileID: 6736446432498155964, guid: 06cd09360ce934047b211280e92b4b56,
-        type: 3}
+      objectReference: {fileID: 100000, guid: 8aeb031c05f7d704aa7e04a0b5babdeb, type: 3}
     - target: {fileID: 3151047407768811197, guid: 1df8045c6b2650f4da17d8f570e983c9,
         type: 3}
       propertyPath: shouldUseModifiers
@@ -213,21 +217,21 @@ PrefabInstance:
       propertyPath: uniqueIdentifier
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 947347642390173155, guid: 1df8045c6b2650f4da17d8f570e983c9,
-        type: 3}
-      propertyPath: uniqueIdentifier
-      value: player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2790740020660750189, guid: 1df8045c6b2650f4da17d8f570e983c9,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4540199218268912490, guid: 1df8045c6b2650f4da17d8f570e983c9,
         type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 3298d4d468badd044b2ca8930315e21d, type: 3}
+    - target: {fileID: 6681721482587562131, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1bf9ee80f2374534b80d6c5880558f5e, type: 3}
+    - target: {fileID: 947347642390173155, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: uniqueIdentifier
+      value: player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1df8045c6b2650f4da17d8f570e983c9, type: 3}
 --- !u!1 &1059672536588906268 stripped

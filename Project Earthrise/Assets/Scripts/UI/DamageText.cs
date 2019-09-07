@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPG.UI.DamageText {
+namespace RPG.UI {
   public class DamageText : MonoBehaviour {
 
     [SerializeField] Text damageText;

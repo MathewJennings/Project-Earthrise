@@ -194,8 +194,8 @@ MonoBehaviour:
   takeDamageUnityEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7649860596044870249}
-        m_MethodName: Spawn
+      - m_Target: {fileID: 2510531787409681755}
+        m_MethodName: SpawnDamageText
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -464,7 +464,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1bf9ee80f2374534b80d6c5880558f5e, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6e60ad64e34fc624ea76483921551c25, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0.9
@@ -560,7 +560,7 @@ PrefabInstance:
     - target: {fileID: 4658214092419354353, guid: 4ae368bdc7186a9408d3b75f93aecade,
         type: 3}
       propertyPath: m_Name
-      value: Damage Text Spawner
+      value: Text Spawner
       objectReference: {fileID: 0}
     - target: {fileID: 5117479730826707441, guid: 4ae368bdc7186a9408d3b75f93aecade,
         type: 3}
@@ -620,15 +620,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7043141568995477148}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7649860596044870249 stripped
+--- !u!114 &2510531787409681755 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 835277399972148469, guid: 4ae368bdc7186a9408d3b75f93aecade,
+  m_CorrespondingSourceObject: {fileID: 4857537553426951111, guid: 4ae368bdc7186a9408d3b75f93aecade,
     type: 3}
   m_PrefabInstance: {fileID: 7043141568995477148}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aaf5628886e8b14db32fc918c5cf124, type: 3}
+  m_Script: {fileID: 11500000, guid: ac7900fe76b5580499179b42a32de942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

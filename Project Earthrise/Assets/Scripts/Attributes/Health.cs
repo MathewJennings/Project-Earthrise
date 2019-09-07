@@ -90,7 +90,7 @@ namespace RPG.Attributes {
       instigatorExperience.GainExperience(GetComponent<BaseStats>().GetStat(Stat.ExperienceReward));
     }
 
-    private void RegenerateHealth() {
+    private void RegenerateHealth(int newLevel) {
       float regenHealthPoints = GetComponent<BaseStats>().GetStat(Stat.Health) * (regenerationPercentage / 100);
       healthPoints.value = Mathf.Max(healthPoints.value, regenHealthPoints);
     }

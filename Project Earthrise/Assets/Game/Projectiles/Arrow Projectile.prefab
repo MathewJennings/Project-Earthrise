@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1157113399108996546}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &3590120499483127182
 TrailRenderer:
@@ -176,6 +176,12 @@ PrefabInstance:
       propertyPath: lifeAfterImpact
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4698168791006735786, guid: 7b0d4008e5de9ee46884626cb26ba9ba,
+        type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 8365529448687615193, guid: 13343f328d8ac704b9dde9828a003d61,
+        type: 3}
     - target: {fileID: 1421124470078223945, guid: 7b0d4008e5de9ee46884626cb26ba9ba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -230,6 +236,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9215067457214212696, guid: 7b0d4008e5de9ee46884626cb26ba9ba,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b0d4008e5de9ee46884626cb26ba9ba, type: 3}
