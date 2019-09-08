@@ -18,14 +18,16 @@ namespace RPG.Combat {
     private float damage = 0f;
 
     private void Start() {
-      transform.LookAt(target.GetHitLocation());
+      if (target == null) {
+        transform.LookAt(transform.position + instigator.transform.forward);
+      } else {
+        transform.LookAt(target.GetHitLocation());
+      }
       Destroy(this.gameObject, maxLifetime);
     }
 
     private void Update() {
-      if (target == null) return;
-
-      if (isHoming && !target.IsDead()) {
+      if (isHoming && target != null && !target.IsDead()) {
         transform.LookAt(target.GetHitLocation());
       }
       transform.Translate(Vector3.forward * Time.deltaTime * speed);
@@ -38,14 +40,23 @@ namespace RPG.Combat {
     }
 
     private void OnTriggerEnter(Collider other) {
-      if (other.GetComponent<Health>() != target) return;
-      if (target.IsDead()) return;
-      target.TakeDamage(instigator, damage);
+      if (target != null) {
+        if (other.GetComponent<Health>() != target) return;
+        if (target.IsDead()) return;
+        target.TakeDamage(instigator, damage);
+        if (hitEffect != null) {
+          Instantiate(hitEffect, target.GetHitLocation(), transform.rotation);
+        }
+      } else {
+        Health hitCharacter = other.GetComponent<Health>();
+        if (hitCharacter == null || hitCharacter.IsDead() || hitCharacter.GetComponent<CombatTarget>() == null) return;
+        hitCharacter.TakeDamage(instigator, damage);
+        if (hitEffect != null) {
+          Instantiate(hitEffect, hitCharacter.GetHitLocation(), transform.rotation);
+        }
+      }
       onHit.Invoke();
       speed = 0f;
-      if (hitEffect != null) {
-        Instantiate(hitEffect, target.GetHitLocation(), transform.rotation);
-      }
       foreach (GameObject toDestroy in destroyOnHit) {
         Destroy(toDestroy);
       }

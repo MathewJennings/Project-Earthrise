@@ -135,15 +135,17 @@ namespace RPG.Combat {
     // Animation Event
     void Hit() {
       Health targetToHit = GetTargetToHit();
+      float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
+      if (currentWeaponConfig.HasProjectile()) {
+        currentWeaponConfig.LaunchProjectile(rightHand, leftHand, targetToHit, this.gameObject, damage);
+      }
+
       if (targetToHit == null) return;
 
-      float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
       if (currentWeapon.value != null) {
         currentWeapon.value.OnHit(targetToHit);
       }
-      if (currentWeaponConfig.HasProjectile()) {
-        currentWeaponConfig.LaunchProjectile(rightHand, leftHand, targetToHit, this.gameObject, damage);
-      } else {
+      if (!currentWeaponConfig.HasProjectile()) {
         targetToHit.TakeDamage(this.gameObject, damage);
       }
     }
