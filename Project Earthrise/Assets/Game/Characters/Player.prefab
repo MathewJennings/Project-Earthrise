@@ -26,22 +26,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26c9c853dfa81d64d98dec47b97b1c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorMappings:
-  - cursorType: 0
-    texture: {fileID: 2800000, guid: 21628736160fcc9488493401da3ef621, type: 3}
-    hotspot: {x: 0, y: 0}
-  - cursorType: 1
-    texture: {fileID: 2800000, guid: 8859fce41c5d0a148ad0b7eebfca7fe9, type: 3}
-    hotspot: {x: 0, y: 0}
-  - cursorType: 2
-    texture: {fileID: 2800000, guid: 2d18e23e3ce249b4489b8bcdd02d3f48, type: 3}
-    hotspot: {x: 0, y: 0}
-  - cursorType: 3
-    texture: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
-    hotspot: {x: 0, y: 0}
-  - cursorType: 4
-    texture: {fileID: 2800000, guid: f8c873f1e53e83f4aabf342d6be1dfc3, type: 3}
-    hotspot: {x: 0, y: 0}
   maxNavMeshProjectionDistance: 0.5
   maxNavPathLength: 40
 --- !u!114 &3527927575625271850
@@ -302,6 +286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SpawnDamageText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3151047407768811197, guid: 1df8045c6b2650f4da17d8f570e983c9,
         type: 3}

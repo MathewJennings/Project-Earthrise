@@ -1,8 +1,8 @@
 ﻿using GameDevTV.Utils;
+using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
-using RPG.Attributes;
 using UnityEngine;
 
 namespace RPG.Control {
@@ -25,6 +25,7 @@ namespace RPG.Control {
     private float timeSinceLastSawPlayer = Mathf.Infinity;
     private int currentWaypointIndex;
     private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+    private bool shouldReciprocateAnAttack = false;
 
     private void Awake() {
       actionScheduler = GetComponent<ActionScheduler>();
@@ -33,6 +34,18 @@ namespace RPG.Control {
       health = GetComponent<Health>();
       player = GameObject.FindWithTag("Player");
       guardPosition = new LazyValue<Vector3>(GetGuardPosition);
+    }
+
+    private void OnEnable() {
+      health.takeDamageUnityEvent.AddListener(TargetAttacker);
+    }
+
+    private void OnDisable() {
+      health.takeDamageUnityEvent.RemoveListener(TargetAttacker);
+    }
+
+    private void TargetAttacker(float damage) {
+      shouldReciprocateAnAttack = true;
     }
 
     private Vector3 GetGuardPosition() {
@@ -46,7 +59,12 @@ namespace RPG.Control {
     private void Update() {
       if (health.IsDead()) return;
 
-      if (InAttackRangeOfPlayer() && fighter.CanAttack(player)) {
+      if (shouldReciprocateAnAttack) {
+        AttackBehavior();
+        if (InAttackRangeOfPlayer()) {
+          shouldReciprocateAnAttack = false;
+        }
+      } else if (InAttackRangeOfPlayer() && fighter.CanAttack(player)) {
         AttackBehavior();
       } else if (timeSinceLastSawPlayer <= suspicionTime) {
         SuspicionBehavior();
