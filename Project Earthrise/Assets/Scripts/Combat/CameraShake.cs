@@ -30,6 +30,10 @@ namespace RPG.Combat {
       for (int i = 0; i < 3; i++) {
         cameraRigs.Add(freeLookCamera.GetRig(i));
         cameraRigsNoise.Add(cameraRigs[i].GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>());
+        print("Found noise");
+      }
+      foreach (CinemachineVirtualCamera rig in cameraRigs) {
+        print(rig);
       }
     }
 

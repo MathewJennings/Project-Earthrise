@@ -9,7 +9,7 @@ namespace RPG.Attributes {
 
     private void Update() {
       float healthFraction = healthComponent.GetFraction();
-      if (Mathf.Approximately(healthFraction, 0) || Mathf.Approximately(healthFraction, 1)) {
+      if (Mathf.Approximately(healthFraction, 0)) {
         canvas.enabled = false;
       } else {
         canvas.enabled = true;
