@@ -488,6 +488,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6500340634312582879}
   - component: {fileID: 6500340634312582876}
+  - component: {fileID: 4920703388171117136}
   m_Layer: 0
   m_Name: Freelook Camera
   m_TagString: Untagged
@@ -613,6 +614,21 @@ MonoBehaviour:
   - {fileID: 6500340633998057621}
   - {fileID: 6500340633994142199}
   - {fileID: 6500340633948382425}
+--- !u!114 &4920703388171117136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6500340634312582878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd03598dc6e7e114d8e2b7113e165401, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.3
+  shakeAmplitude: 1
+  shakeFrequency: 1
 --- !u!1 &6500340634515002427
 GameObject:
   m_ObjectHideFlags: 0

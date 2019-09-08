@@ -41,6 +41,7 @@ namespace RPG.Combat {
 
     private void OnTriggerEnter(Collider other) {
       if (target != null) {
+        // Enemy AI
         if (other.GetComponent<Health>() != target) return;
         if (target.IsDead()) return;
         target.TakeDamage(instigator, damage);
@@ -48,6 +49,7 @@ namespace RPG.Combat {
           Instantiate(hitEffect, target.GetHitLocation(), transform.rotation);
         }
       } else {
+        // Player
         Health hitCharacter = other.GetComponent<Health>();
         if (hitCharacter == null || hitCharacter.IsDead() || hitCharacter.GetComponent<CombatTarget>() == null) return;
         hitCharacter.TakeDamage(instigator, damage);
