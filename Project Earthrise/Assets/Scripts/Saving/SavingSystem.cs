@@ -29,7 +29,6 @@ namespace RPG.Saving {
     }
     public void Delete(string saveFile) {
       string path = GetPathFromSaveFile(saveFile);
-      print("Deleting from " + path);
       File.Delete(path);
     }
 
@@ -42,7 +41,6 @@ namespace RPG.Saving {
 
     private void SaveFile(string saveFile, object state) {
       string path = GetPathFromSaveFile(saveFile);
-      print("Saving to " + path);
       using(FileStream stream = File.Open(path, FileMode.Create)) {
         BinaryFormatter formatter = new BinaryFormatter();
         formatter.Serialize(stream, state);
@@ -54,7 +52,6 @@ namespace RPG.Saving {
       if (!File.Exists(path)) {
         return new Dictionary<string, object>();
       }
-      print("Loading from " + path);
       using(FileStream stream = File.Open(path, FileMode.Open)) {
         BinaryFormatter formatter = new BinaryFormatter();
         return (Dictionary<string, object>) formatter.Deserialize(stream);

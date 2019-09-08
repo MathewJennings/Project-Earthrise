@@ -14,13 +14,13 @@ namespace RPG.SceneManagement {
     }
 
     private void Update() {
-      if (Input.GetKeyDown(KeyCode.S)) {
+      if (Input.GetKeyDown(KeyCode.F5)) {
         Save();
       }
-      if (Input.GetKeyDown(KeyCode.L)) {
+      if (Input.GetKeyDown(KeyCode.F8)) {
         Load();
       }
-      if (Input.GetKeyDown(KeyCode.D)) {
+      if (Input.GetKeyDown(KeyCode.F9)) {
         Delete();
       }
     }

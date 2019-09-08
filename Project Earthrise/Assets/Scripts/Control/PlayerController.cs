@@ -1,6 +1,6 @@
 ﻿using System;
-using RPG.Movement;
 using RPG.Attributes;
+using RPG.Movement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -26,6 +26,24 @@ namespace RPG.Control {
     }
 
     void Update() {
+      Vector3 movementTarget = Vector3.zero;
+      if (Input.GetKey(KeyCode.W)) {
+        movementTarget += Camera.main.transform.forward;
+      }
+      if (Input.GetKey(KeyCode.A)) {
+        movementTarget -= Camera.main.transform.right;
+      }
+      if (Input.GetKey(KeyCode.S)) {
+        movementTarget -= Camera.main.transform.forward;
+      }
+      if (Input.GetKey(KeyCode.D)) {
+        movementTarget += Camera.main.transform.right;
+      }
+      if (movementTarget != Vector3.zero) {
+        GetComponent<Mover>().MoveInDirection(movementTarget, 1f);
+      }
+
+      // Point and click
       if (InteractWithUI()) return;
       if (playerHealth.IsDead()) {
         SetCursor(CursorType.None);
@@ -108,7 +126,7 @@ namespace RPG.Control {
       float total = 0f;
       if (path.corners.Length < 2) return total;
       for (int i = 0; i < path.corners.Length - 1; i++) {
-        total += Vector3.Distance(path.corners[i], path.corners[i+1]);
+        total += Vector3.Distance(path.corners[i], path.corners[i + 1]);
       }
       return total;
     }

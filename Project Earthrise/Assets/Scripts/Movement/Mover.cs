@@ -1,5 +1,5 @@
-﻿using RPG.Core;
-using RPG.Attributes;
+﻿using RPG.Attributes;
+using RPG.Core;
 using RPG.Saving;
 using UnityEngine;
 using UnityEngine.AI;
@@ -29,6 +29,12 @@ namespace RPG.Movement {
 
     public void MoveTo(Vector3 destination, float speedFraction) {
       navMeshAgent.destination = destination;
+      navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
+      navMeshAgent.isStopped = false;
+    }
+
+    public void MoveInDirection(Vector3 direction, float speedFraction) {
+      navMeshAgent.destination = transform.position + direction;
       navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
       navMeshAgent.isStopped = false;
     }
