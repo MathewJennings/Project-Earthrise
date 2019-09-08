@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RPG.Attributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,20 +9,30 @@ namespace RPG.Combat {
     [SerializeField] UnityEvent onHit;
     [SerializeField] GameObject hitEffect = null;
 
+    List<CombatTarget> collidingTargets = new List<CombatTarget>();
+
+    public List<CombatTarget> GetCollidingCombatTargets() {
+      return collidingTargets;
+    }
+
     public void OnHit(Health target) {
-      print("Hit!");
       onHit.Invoke();
       if (hitEffect != null) {
-        Instantiate(hitEffect, GetHitLocation(target), target.transform.rotation);
+        Instantiate(hitEffect, target.GetHitLocation(), target.transform.rotation);
       }
     }
 
-    private Vector3 GetHitLocation(Health target) {
-      CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
-      if (targetCapsule == null) {
-        return target.transform.position;
-      } else {
-        return target.transform.position + Vector3.up * targetCapsule.height / 2;
+    private void OnTriggerEnter(Collider other) {
+      CombatTarget enemy = other.GetComponent<CombatTarget>();
+      if (enemy != null) {
+        collidingTargets.Add(enemy);
+      }
+    }
+
+    private void OnTriggerExit(Collider other) {
+      CombatTarget enemy = other.GetComponent<CombatTarget>();
+      if (enemy != null) {
+        collidingTargets.Remove(enemy);
       }
     }
   }

@@ -67,6 +67,15 @@ namespace RPG.Attributes {
       }
     }
 
+    public Vector3 GetHitLocation() {
+      CapsuleCollider capsule = GetComponent<CapsuleCollider>();
+      if (capsule == null) {
+        return transform.position;
+      } else {
+        return transform.position + Vector3.up * capsule.height / 2;
+      }
+    }
+
     public void Heal(float healthToRestore) {
       healthPoints.value = Mathf.Min(healthPoints.value + healthToRestore, GetComponent<BaseStats>().GetStat(Stat.Health));
     }

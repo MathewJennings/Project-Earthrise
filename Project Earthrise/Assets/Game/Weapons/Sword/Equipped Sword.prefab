@@ -7,11 +7,42 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4267854304719369674, guid: 7b2cb7f4e65de094586f96af46949d6a,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267854304719369674, guid: 7b2cb7f4e65de094586f96af46949d6a,
+        type: 3}
+      propertyPath: m_Center.z
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267854304719369674, guid: 7b2cb7f4e65de094586f96af46949d6a,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4267854304719369674, guid: 7b2cb7f4e65de094586f96af46949d6a,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.85
+      objectReference: {fileID: 0}
     - target: {fileID: 2195488719770677504, guid: 7b2cb7f4e65de094586f96af46949d6a,
         type: 3}
       propertyPath: m_Name
       value: Equipped Sword
       objectReference: {fileID: 0}
+    - target: {fileID: 5813101327754997030, guid: 7b2cb7f4e65de094586f96af46949d6a,
+        type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 8365529448687615193, guid: 13343f328d8ac704b9dde9828a003d61,
+        type: 3}
+    - target: {fileID: 2341233564135067600, guid: 7b2cb7f4e65de094586f96af46949d6a,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ecb1846d8f5334e4098e073700dc88fb, type: 3}
     - target: {fileID: 2043421166768502812, guid: 7b2cb7f4e65de094586f96af46949d6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,22 +98,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5813101327754997030, guid: 7b2cb7f4e65de094586f96af46949d6a,
-        type: 3}
-      propertyPath: hitEffect
-      value: 
-      objectReference: {fileID: 8365529448687615193, guid: 13343f328d8ac704b9dde9828a003d61,
-        type: 3}
     - target: {fileID: 1036254672397217794, guid: 7b2cb7f4e65de094586f96af46949d6a,
         type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2341233564135067600, guid: 7b2cb7f4e65de094586f96af46949d6a,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: ecb1846d8f5334e4098e073700dc88fb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b2cb7f4e65de094586f96af46949d6a, type: 3}
 --- !u!4 &1141222154070278557 stripped

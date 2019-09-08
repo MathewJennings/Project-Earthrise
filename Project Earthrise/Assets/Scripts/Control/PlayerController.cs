@@ -1,5 +1,6 @@
 ﻿using System;
 using RPG.Attributes;
+using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,9 +24,29 @@ namespace RPG.Control {
 
     private void Awake() {
       playerHealth = GetComponent<Health>();
+      Cursor.visible = false;
     }
 
     void Update() {
+      InteractWithMovement();
+
+      //New Combat Code
+      if (Input.GetKeyDown(KeyCode.E)) {
+        GetComponent<Fighter>().Attack();
+      }
+
+      // Old Point and click
+      if (InteractWithUI()) return;
+      if (playerHealth.IsDead()) {
+        SetCursor(CursorType.None);
+        return;
+      }
+      if (InteractWithComponent()) return;
+      if (BACKUPInteractWithMovement()) return;
+      SetCursor(CursorType.None);
+    }
+
+    private void InteractWithMovement() {
       Vector3 movementTarget = Vector3.zero;
       if (Input.GetKey(KeyCode.W)) {
         movementTarget += Camera.main.transform.forward;
@@ -42,16 +63,6 @@ namespace RPG.Control {
       if (movementTarget != Vector3.zero) {
         GetComponent<Mover>().MoveInDirection(movementTarget, 1f);
       }
-
-      // Point and click
-      if (InteractWithUI()) return;
-      if (playerHealth.IsDead()) {
-        SetCursor(CursorType.None);
-        return;
-      }
-      if (InteractWithComponent()) return;
-      if (InteractWithMovement()) return;
-      SetCursor(CursorType.None);
     }
 
     private bool InteractWithUI() {
@@ -86,7 +97,7 @@ namespace RPG.Control {
       return hits;
     }
 
-    private bool InteractWithMovement() {
+    private bool BACKUPInteractWithMovement() {
       Vector3 target;
       bool hasHit = RaycastNavMesh(out target);
       if (hasHit) {

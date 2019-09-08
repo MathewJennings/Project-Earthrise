@@ -18,7 +18,7 @@ namespace RPG.Combat {
     private float damage = 0f;
 
     private void Start() {
-      transform.LookAt(GetAimLocation());
+      transform.LookAt(target.GetHitLocation());
       Destroy(this.gameObject, maxLifetime);
     }
 
@@ -26,7 +26,7 @@ namespace RPG.Combat {
       if (target == null) return;
 
       if (isHoming && !target.IsDead()) {
-        transform.LookAt(GetAimLocation());
+        transform.LookAt(target.GetHitLocation());
       }
       transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
@@ -37,15 +37,6 @@ namespace RPG.Combat {
       this.damage = damage;
     }
 
-    private Vector3 GetAimLocation() {
-      CapsuleCollider targetCapsule = target.GetComponent<CapsuleCollider>();
-      if (targetCapsule == null) {
-        return target.transform.position;
-      } else {
-        return target.transform.position + Vector3.up * targetCapsule.height / 2;
-      }
-    }
-
     private void OnTriggerEnter(Collider other) {
       if (other.GetComponent<Health>() != target) return;
       if (target.IsDead()) return;
@@ -53,7 +44,7 @@ namespace RPG.Combat {
       onHit.Invoke();
       speed = 0f;
       if (hitEffect != null) {
-        Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+        Instantiate(hitEffect, target.GetHitLocation(), transform.rotation);
       }
       foreach (GameObject toDestroy in destroyOnHit) {
         Destroy(toDestroy);

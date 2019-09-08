@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using GameDevTV.Utils;
+using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
-using RPG.Attributes;
 using RPG.Saving;
 using RPG.Stats;
 using UnityEngine;
@@ -47,10 +48,6 @@ namespace RPG.Combat {
       }
     }
 
-    public Health GetTarget() {
-      return target;
-    }
-
     public void EquipWeapon(WeaponConfig weapon) {
       currentWeaponConfig = weapon;
       currentWeapon.value = AttachWeapon(weapon);
@@ -65,6 +62,10 @@ namespace RPG.Combat {
       if (target == null) return false;
       Health targetToCheck = target.GetComponent<Health>();
       return targetToCheck != null && !targetToCheck.IsDead();
+    }
+
+    public void Attack() {
+      TriggerAttackAnimation();
     }
 
     public void Attack(GameObject target) {
@@ -133,18 +134,36 @@ namespace RPG.Combat {
 
     // Animation Event
     void Hit() {
-      if (target == null) return;
+      Health targetToHit = GetTargetToHit();
+      if (targetToHit == null) return;
 
       float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-
       if (currentWeapon.value != null) {
-        currentWeapon.value.OnHit(target);
+        currentWeapon.value.OnHit(targetToHit);
       }
-
       if (currentWeaponConfig.HasProjectile()) {
-        currentWeaponConfig.LaunchProjectile(rightHand, leftHand, target, this.gameObject, damage);
+        currentWeaponConfig.LaunchProjectile(rightHand, leftHand, targetToHit, this.gameObject, damage);
       } else {
-        target.TakeDamage(this.gameObject, damage);
+        targetToHit.TakeDamage(this.gameObject, damage);
+      }
+    }
+
+    private Health GetTargetToHit() {
+      if (this.CompareTag("Player")) {
+        List<CombatTarget> hittableEnemies = currentWeapon.value.GetCollidingCombatTargets();
+        if (hittableEnemies.Count == 0) return null;
+        hittableEnemies.Sort(
+          (x, y) => Vector3.Distance(currentWeapon.value.transform.position, x.GetComponent<Health>().GetHitLocation())
+          .CompareTo(Vector3.Distance(currentWeapon.value.transform.position, y.GetComponent<Health>().GetHitLocation()))
+        );
+        Health candidate = hittableEnemies[0].GetComponent<Health>();
+        if (CanAttack(candidate.gameObject)) {
+          transform.LookAt(candidate.transform);
+          return candidate;
+        }
+        return null;
+      } else {
+        return target;
       }
     }
   }
