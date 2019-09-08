@@ -82,6 +82,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.15
       objectReference: {fileID: 0}
+    - target: {fileID: 8765105646617291500, guid: 9d25205f5cc78724c977506ce54d63b9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 01b2546c969fe814794af634cb4534f4, type: 2}
     - target: {fileID: 760468770669170619, guid: 9d25205f5cc78724c977506ce54d63b9,
         type: 3}
       propertyPath: defaultWeapon
@@ -99,10 +104,10 @@ PrefabInstance:
       propertyPath: characterClass
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 8765105646617291500, guid: 9d25205f5cc78724c977506ce54d63b9,
+    - target: {fileID: 3914794092915609667, guid: 9d25205f5cc78724c977506ce54d63b9,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 01b2546c969fe814794af634cb4534f4, type: 2}
+      propertyPath: characterName
+      value: Captain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d25205f5cc78724c977506ce54d63b9, type: 3}

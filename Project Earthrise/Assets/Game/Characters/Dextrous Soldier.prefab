@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: chaseDistance
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 8765105646617291500, guid: 9d25205f5cc78724c977506ce54d63b9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bfbe2e8b331e2cc42be1591f949c0e41, type: 2}
     - target: {fileID: 760468770669170619, guid: 9d25205f5cc78724c977506ce54d63b9,
         type: 3}
       propertyPath: defaultWeapon
@@ -89,10 +94,10 @@ PrefabInstance:
       propertyPath: characterClass
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8765105646617291500, guid: 9d25205f5cc78724c977506ce54d63b9,
+    - target: {fileID: 3914794092915609667, guid: 9d25205f5cc78724c977506ce54d63b9,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: bfbe2e8b331e2cc42be1591f949c0e41, type: 2}
+      propertyPath: characterName
+      value: Archer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d25205f5cc78724c977506ce54d63b9, type: 3}

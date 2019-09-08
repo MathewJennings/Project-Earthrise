@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8207547, g: 0.2516465, b: 0.2516465, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2, y: 0}
+  m_SizeDelta: {x: -4, y: -2}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &7768801043077224424
 CanvasRenderer:
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.25858578, g: 0.81960785, b: 0.25098035, a: 1}
+  m_Color: {r: 0.6698113, g: 0.15481488, b: 0.15481488, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -257,10 +257,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3057067428042556895}
-  - component: {fileID: 4170384740341699642}
   - component: {fileID: 2257398487877849889}
   m_Layer: 0
-  m_Name: Health Bar
+  m_Name: Enemy Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -281,18 +280,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4170384740341699642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8199544174095884097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2df902be71fac24418ff5ea9b7de724e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2257398487877849889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +292,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e125d6c87cbfb46b3f8cb28f08f2f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 0}
+  healthComponent: {fileID: 0}
   canvas: {fileID: 4544878668136986099}
   foreground: {fileID: 5191113997248520332}
