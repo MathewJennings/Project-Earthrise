@@ -65,6 +65,7 @@ namespace RPG.Combat {
     }
 
     public void Attack() {
+      GetComponent<ActionScheduler>().StartAction(this);
       TriggerAttackAnimation();
     }
 
