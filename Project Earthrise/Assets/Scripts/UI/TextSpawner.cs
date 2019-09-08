@@ -12,7 +12,11 @@ namespace RPG.UI {
     }
 
     private void OnDisable() {
-      GetComponentInParent<BaseStats>().onLevelUp += SpawnLevelUpText;
+      // Tech Debt. Why is this null when first starting the game?
+      BaseStats parentBaseStats = GetComponentInParent<BaseStats>();
+      if (parentBaseStats != null) {
+        parentBaseStats.onLevelUp -= SpawnLevelUpText;
+      }
     }
 
     public void SpawnDamageText(float damageAmount) {
