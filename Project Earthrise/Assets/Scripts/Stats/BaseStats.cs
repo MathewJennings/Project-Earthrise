@@ -1,7 +1,5 @@
-﻿using System;
-using GameDevTV.Utils;
+﻿using GameDevTV.Utils;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace RPG.Stats {
   public class BaseStats : MonoBehaviour {
