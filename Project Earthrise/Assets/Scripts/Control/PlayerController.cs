@@ -19,13 +19,14 @@ namespace RPG.Control {
     void Update() {
       InteractWithMovement();
 
-      if (Input.GetKeyDown(KeyCode.E)) {
+      if (Input.GetMouseButtonDown(0)) {
         GetComponent<Fighter>().Attack();
       }
     }
 
     private void InteractWithMovement() {
       Vector3 movementTarget = Vector3.zero;
+      float speed = 1f;
       if (Input.GetKey(KeyCode.W)) {
         movementTarget += Camera.main.transform.forward;
       }
@@ -38,8 +39,11 @@ namespace RPG.Control {
       if (Input.GetKey(KeyCode.D)) {
         movementTarget += Camera.main.transform.right;
       }
+      if (Input.GetKey(KeyCode.LeftShift)) {
+        speed = 1.2f;
+      }
       if (movementTarget != Vector3.zero) {
-        GetComponent<Mover>().MoveInDirection(movementTarget, 1f);
+        GetComponent<Mover>().MoveInDirection(movementTarget, speed);
       }
     }
   }

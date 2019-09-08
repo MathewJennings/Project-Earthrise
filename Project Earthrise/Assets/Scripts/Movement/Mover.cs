@@ -36,7 +36,7 @@ namespace RPG.Movement {
     public void MoveInDirection(Vector3 direction, float speedFraction) {
       GetComponent<ActionScheduler>().StartAction(this);
       navMeshAgent.destination = transform.position + direction;
-      navMeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);
+      navMeshAgent.speed = maxSpeed * Mathf.Max(0, speedFraction);
       navMeshAgent.isStopped = false;
     }
 

@@ -1,6 +1,8 @@
+using System;
+using RPG.Combat;
 using UnityEngine;
 
-namespace RPG.Core{
+namespace RPG.Core {
   public class ActionScheduler : MonoBehaviour {
     
     private IAction currentAction;
@@ -16,6 +18,10 @@ namespace RPG.Core{
 
     public void CancelCurrentAction() {
       StartAction(null);
+    }
+
+    public IAction GetCurrentAction() {
+      return currentAction;
     }
   }
 }

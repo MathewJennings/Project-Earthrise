@@ -135,9 +135,11 @@ namespace RPG.Combat {
 
     // Animation Event
     void Hit() {
+
       Health targetToHit = GetTargetToHit();
       float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-      if (currentWeaponConfig.HasProjectile()) {
+      if (currentWeaponConfig.HasProjectile() && GetComponent<ActionScheduler>().GetCurrentAction() is Fighter) {
+        // Make Movement interrupt launching projectiles
         currentWeaponConfig.LaunchProjectile(rightHand, leftHand, targetToHit, this.gameObject, damage);
       }
 
