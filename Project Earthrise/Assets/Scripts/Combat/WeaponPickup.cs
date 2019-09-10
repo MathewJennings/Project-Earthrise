@@ -1,26 +1,13 @@
 ﻿using System.Collections;
 using RPG.Attributes;
-using RPG.Control;
-using RPG.Movement;
 using UnityEngine;
 
 namespace RPG.Combat {
-  public class WeaponPickup : MonoBehaviour, IRaycastable {
+  public class WeaponPickup : MonoBehaviour {
 
     [SerializeField] WeaponConfig weapon;
     [SerializeField] float healthToRestore = 0f;
     [SerializeField] float respawnTime = 5f;
-
-    public CursorType GetCursorType() {
-      return CursorType.Pickup;
-    }
-
-    public bool HandleRaycast(PlayerController callingController) {
-      if (Input.GetMouseButtonDown(0)) {
-        callingController.GetComponent<Mover>().StartMoveAction(this.transform.position, 1f);
-      }
-      return true;
-    }
 
     private void OnTriggerEnter(Collider other) {
       if (other.CompareTag("Player")) {

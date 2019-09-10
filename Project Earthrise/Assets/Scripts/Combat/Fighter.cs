@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using GameDevTV.Utils;
 using RPG.Attributes;
@@ -65,6 +64,7 @@ namespace RPG.Combat {
     }
 
     public void Attack() {
+      StartCoroutine(GetComponent<Mover>().RotateAsynchronously(Camera.main.transform.forward));
       GetComponent<ActionScheduler>().StartAction(this);
       TriggerAttackAnimation();
     }
@@ -138,8 +138,7 @@ namespace RPG.Combat {
 
       Health targetToHit = GetTargetToHit();
       float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-      if (currentWeaponConfig.HasProjectile() && GetComponent<ActionScheduler>().GetCurrentAction() is Fighter) {
-        // Make Movement interrupt launching projectiles
+      if (currentWeaponConfig.HasProjectile() && GetComponent<ActionScheduler>().GetCurrentAction() is Fighter) { // Make Movement interrupt launching projectiles
         currentWeaponConfig.LaunchProjectile(rightHand, leftHand, targetToHit, this.gameObject, damage);
       }
 
@@ -162,10 +161,7 @@ namespace RPG.Combat {
           .CompareTo(Vector3.Distance(currentWeapon.value.transform.position, y.GetComponent<Health>().GetHitLocation()))
         );
         Health candidate = hittableEnemies[0].GetComponent<Health>();
-        if (CanAttack(candidate.gameObject)) {
-          transform.LookAt(candidate.transform);
-          return candidate;
-        }
+        if (CanAttack(candidate.gameObject)) return candidate;
         return null;
       } else {
         return target;

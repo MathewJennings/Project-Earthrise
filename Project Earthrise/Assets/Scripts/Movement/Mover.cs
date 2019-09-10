@@ -1,4 +1,6 @@
-﻿using RPG.Attributes;
+﻿using System;
+using System.Collections;
+using RPG.Attributes;
 using RPG.Core;
 using RPG.Saving;
 using UnityEngine;
@@ -8,6 +10,9 @@ namespace RPG.Movement {
   public class Mover : MonoBehaviour, IAction, ISaveable {
 
     [SerializeField] float maxSpeed = 6f;
+    [Range(1, 2)]
+    [SerializeField] float rotationSpeed = 2f;
+    [SerializeField] float maxRotationTime = 1f;
 
     private NavMeshAgent navMeshAgent;
     private Health health;
@@ -40,6 +45,16 @@ namespace RPG.Movement {
       navMeshAgent.isStopped = false;
     }
 
+    public IEnumerator RotateAsynchronously(Vector3 newForward) {
+      float elapsedRotationTime = 0f;
+      while (!DoneRotating(newForward)) {
+        elapsedRotationTime += rotationSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(newForward), elapsedRotationTime);
+        if (elapsedRotationTime / rotationSpeed > maxRotationTime) yield break;
+        yield return new WaitForEndOfFrame();
+      }
+    }
+
     public void Cancel() {
       navMeshAgent.isStopped = true;
     }
@@ -61,6 +76,13 @@ namespace RPG.Movement {
       Vector3 localVelocity = transform.InverseTransformDirection(velocity);
       float speed = localVelocity.z;
       GetComponent<Animator>().SetFloat("forwardSpeed", speed);
+    }
+
+    private bool DoneRotating(Vector3 newForward) {
+      Vector3 normalizedPlayerForward = transform.forward.normalized;
+      Ray playerRotationRay = new Ray(transform.position, normalizedPlayerForward);
+      Vector3 normalizedCameraForward = new Vector3(newForward.x, 0, newForward.z).normalized;
+      return Vector3.Distance(normalizedPlayerForward, normalizedCameraForward) < 0.01f;
     }
   }
 }
