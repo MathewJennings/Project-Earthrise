@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Saving;
@@ -13,13 +12,16 @@ namespace RPG.Movement {
     [Range(1, 2)]
     [SerializeField] float rotationSpeed = 2f;
     [SerializeField] float maxRotationTime = 1f;
+    [SerializeField] float energyToSprint = 0.1f;
 
     private NavMeshAgent navMeshAgent;
     private Health health;
+    private Energy energy;
 
     private void Awake() {
       navMeshAgent = GetComponent<NavMeshAgent>();
       health = GetComponent<Health>();
+      energy = GetComponent<Energy>();
     }
 
     private void Update() {
@@ -40,6 +42,13 @@ namespace RPG.Movement {
 
     public void MoveInDirection(Vector3 direction, float speedFraction) {
       GetComponent<ActionScheduler>().StartAction(this);
+      if (speedFraction > 1) {
+        if (energy.CanConsumeEnergy(energyToSprint)) {
+          energy.ConsumeEnergy(energyToSprint);
+        } else {
+          speedFraction = 1;
+        }
+      }
       navMeshAgent.destination = transform.position + direction;
       navMeshAgent.speed = maxSpeed * Mathf.Max(0, speedFraction);
       navMeshAgent.isStopped = false;

@@ -42,6 +42,9 @@ namespace RPG.Control {
       if (Input.GetKey(KeyCode.LeftShift)) {
         speed = 1.2f;
       }
+      if (Input.GetKeyUp(KeyCode.LeftShift)) {
+        GetComponent<Energy>().StopConsumingEnergy();
+      }
       if (movementTarget != Vector3.zero) {
         GetComponent<Mover>().MoveInDirection(movementTarget, speed);
       }
