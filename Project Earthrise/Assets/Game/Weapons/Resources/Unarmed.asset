@@ -20,3 +20,4 @@ MonoBehaviour:
   range: 1.5
   isRightHanded: 0
   projectile: {fileID: 0}
+  energyToAttack: 5

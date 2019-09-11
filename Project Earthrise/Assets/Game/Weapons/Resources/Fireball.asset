@@ -21,3 +21,4 @@ MonoBehaviour:
   isRightHanded: 0
   projectile: {fileID: 4793239800512796193, guid: 5cdf53466e4f69145ab223a50bfc1569,
     type: 3}
+  energyToAttack: 10

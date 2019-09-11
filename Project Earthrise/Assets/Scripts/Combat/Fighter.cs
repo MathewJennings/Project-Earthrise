@@ -63,12 +63,17 @@ namespace RPG.Combat {
       return targetToCheck != null && !targetToCheck.IsDead();
     }
 
+    // Player attacks without a specific target
     public void Attack() {
-      StartCoroutine(GetComponent<Mover>().RotateAsynchronously(Camera.main.transform.forward));
-      GetComponent<ActionScheduler>().StartAction(this);
-      TriggerAttackAnimation();
+      if (GetComponent<Energy>().CanConsumeEnergy(currentWeaponConfig.GetEnergyToAttack())) {
+        GetComponent<Energy>().ConsumeEnergy(currentWeaponConfig.GetEnergyToAttack());
+        StartCoroutine(GetComponent<Mover>().RotateAsynchronously(Camera.main.transform.forward));
+        GetComponent<ActionScheduler>().StartAction(this);
+        TriggerAttackAnimation();
+      }
     }
 
+    // Enemies attack specific targets
     public void Attack(GameObject target) {
       GetComponent<ActionScheduler>().StartAction(this);
       this.target = target.GetComponent<Health>();
@@ -141,6 +146,9 @@ namespace RPG.Combat {
       if (currentWeaponConfig.HasProjectile() && GetComponent<ActionScheduler>().GetCurrentAction() is Fighter) { // Make Movement interrupt launching projectiles
         currentWeaponConfig.LaunchProjectile(rightHand, leftHand, targetToHit, this.gameObject, damage);
       }
+
+      Energy energyComponent = GetComponent<Energy>();
+      if (energyComponent != null) energyComponent.StopConsumingEnergy();
 
       if (targetToHit == null) return;
 

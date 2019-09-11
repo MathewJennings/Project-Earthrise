@@ -11,6 +11,7 @@ namespace RPG.Combat {
     [SerializeField] float range = 2f;
     [SerializeField] bool isRightHanded = true;
     [SerializeField] Projectile projectile = null;
+    [SerializeField] float energyToAttack = 0f;
 
     private const string weaponName = "Weapon";
 
@@ -55,6 +56,10 @@ namespace RPG.Combat {
 
     public bool HasProjectile() {
       return projectile != null;
+    }
+
+    public float GetEnergyToAttack() {
+      return energyToAttack;
     }
 
     public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage) {

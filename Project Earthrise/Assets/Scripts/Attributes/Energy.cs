@@ -10,6 +10,7 @@ namespace RPG.Attributes {
     private LazyValue<float> energyPoints;
     private LazyValue<float> energyRecharge;
     private bool consumingEnergy;
+    private bool isRecharging;
 
     private void Awake() {
       energyPoints = new LazyValue<float>(GetInitialEnergy);
@@ -69,14 +70,18 @@ namespace RPG.Attributes {
 
     public void RestoreState(object state) {
       energyPoints.value = (float) state;
+      StartCoroutine(RechargeEnergy());
     }
 
     private IEnumerator RechargeEnergy() {
+      if (isRecharging) yield break;
+      isRecharging = true;
       yield return new WaitForSeconds(1);
       while (!consumingEnergy) {
         RestoreEnergy(energyRecharge.value * Time.deltaTime);
         yield return new WaitForEndOfFrame();
       }
+      isRecharging = false;
     }
   }
 }
