@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Saving;
@@ -69,14 +70,20 @@ namespace RPG.Movement {
     }
 
     public object CaptureState() {
-      return new SerializableVector3(transform.position);
+      Dictionary<string, SerializableVector3> stateMap = new Dictionary<string, SerializableVector3>();
+      stateMap["position"] = new SerializableVector3(transform.position);
+      stateMap["rotation"] = new SerializableVector3(transform.rotation.eulerAngles);
+      return stateMap;
     }
 
     public void RestoreState(object state) {
+      Dictionary<string, SerializableVector3> stateMap = (Dictionary<string, SerializableVector3>) state;
+
       GetComponent<ActionScheduler>().CancelCurrentAction();
       NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
       navMeshAgent.enabled = false;
-      transform.position = ((SerializableVector3) state).ToVector3();
+      transform.position = stateMap["position"].ToVector3();
+      transform.rotation = Quaternion.Euler(stateMap["rotation"].ToVector3());
       navMeshAgent.enabled = true;
     }
 
