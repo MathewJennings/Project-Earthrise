@@ -39,6 +39,9 @@ namespace RPG.Control {
       if (Input.GetKey(KeyCode.D)) {
         movementTarget += Camera.main.transform.right;
       }
+      if (Input.GetKey(KeyCode.LeftControl)) {
+        speed = 0.3f;
+      }
       if (Input.GetKey(KeyCode.LeftShift)) {
         speed = 1.2f;
       }
