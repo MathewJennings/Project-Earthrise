@@ -65,12 +65,14 @@ namespace RPG.Combat {
 
     // Player attacks without a specific target
     public void Attack() {
-      if (GetComponent<Energy>().CanConsumeEnergy(currentWeaponConfig.GetEnergyToAttack())) {
+      if (!GetComponent<Energy>().CanConsumeEnergy(currentWeaponConfig.GetEnergyToAttack())) return;
+
+      StartCoroutine(GetComponent<Mover>().RotateAsynchronously(Camera.main.transform.forward));
+      GetComponent<ActionScheduler>().StartAction(this);
+      if (!isAnAttackQueued()) {
         GetComponent<Energy>().ConsumeEnergy(currentWeaponConfig.GetEnergyToAttack());
-        StartCoroutine(GetComponent<Mover>().RotateAsynchronously(Camera.main.transform.forward));
-        GetComponent<ActionScheduler>().StartAction(this);
-        TriggerAttackAnimation();
       }
+      TriggerAttackAnimation();
     }
 
     // Enemies attack specific targets
@@ -122,6 +124,10 @@ namespace RPG.Combat {
       }
     }
 
+    private bool isAnAttackQueued() {
+      return GetComponent<Animator>().GetBool("attack");
+    }
+
     private void TriggerAttackAnimation() {
       GetComponent<Animator>().ResetTrigger("stopAttack");
       // This will trigger the Hit() event.
@@ -134,12 +140,12 @@ namespace RPG.Combat {
     }
 
     // Animation Event
-    void Shoot() {
+    private void Shoot() {
       Hit();
     }
 
     // Animation Event
-    void Hit() {
+    private void Hit() {
 
       Health targetToHit = GetTargetToHit();
       float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
