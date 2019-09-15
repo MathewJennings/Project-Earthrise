@@ -45,6 +45,18 @@ namespace RPG.Stats {
       return currentLevel.value;
     }
 
+    public float GetExperienceFractionToNextLevel() {
+      float xpNeededForLastLevelUp;
+      if (GetLevel() == 1) {
+        xpNeededForLastLevelUp = 0;
+      } else {
+        xpNeededForLastLevelUp = progression.GetStat(Stat.ExperienceToLevelUp, characterClass, GetLevel() - 1);
+      }
+      float pointsBeyondCurrentLevel = experience.GetPoints() - xpNeededForLastLevelUp;
+      float pointsToNextLevel = GetStat(Stat.ExperienceToLevelUp) - xpNeededForLastLevelUp;
+      return pointsBeyondCurrentLevel / pointsToNextLevel;
+    }
+
     private float GetBaseStat(Stat stat) {
       return progression.GetStat(stat, characterClass, GetLevel());
     }
