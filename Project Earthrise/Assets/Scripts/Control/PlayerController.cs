@@ -6,9 +6,6 @@ using UnityEngine;
 namespace RPG.Control {
   public class PlayerController : MonoBehaviour {
 
-    [SerializeField] float maxNavMeshProjectionDistance = 1f;
-    [SerializeField] float maxNavPathLength = 40f;
-
     private Health playerHealth;
 
     private void Awake() {
