@@ -200,16 +200,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2790740020660750189, guid: 1df8045c6b2650f4da17d8f570e983c9,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2790740020660750189, guid: 1df8045c6b2650f4da17d8f570e983c9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.19
-      objectReference: {fileID: 0}
     - target: {fileID: 326659638172287543, guid: 1df8045c6b2650f4da17d8f570e983c9,
         type: 3}
       propertyPath: handTransform
@@ -247,6 +237,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
         type: 3}
+      propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
       propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1762344152240230056}
@@ -254,6 +249,31 @@ PrefabInstance:
         type: 3}
       propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SpawnDamageText
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 5556864349179731094}
+    - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Aggrevate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420033024116375140, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: takeDamageUnityEvent.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3151047407768811197, guid: 1df8045c6b2650f4da17d8f570e983c9,
         type: 3}
@@ -264,6 +284,16 @@ PrefabInstance:
         type: 3}
       propertyPath: characterName
       value: Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 2790740020660750189, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2790740020660750189, guid: 1df8045c6b2650f4da17d8f570e983c9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.19
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1df8045c6b2650f4da17d8f570e983c9, type: 3}
