@@ -15,6 +15,7 @@ namespace RPG.Control {
     [SerializeField] float waypointTolerance = 1f;
     [SerializeField] float waypointDwellTime = 3f;
     [SerializeField] float aggroCooldownTime = 5f;
+    [SerializeField] float shoutDistance = 5f;
 
     private ActionScheduler actionScheduler;
     private Mover mover;
@@ -64,13 +65,24 @@ namespace RPG.Control {
     }
 
     private bool IsAggrevated() {
-      return timeSinceAggrevated <= aggroCooldownTime || 
-      Vector3.Distance(transform.position, player.transform.position) <= chaseDistance;
+      return timeSinceAggrevated <= aggroCooldownTime ||
+        Vector3.Distance(transform.position, player.transform.position) <= chaseDistance;
     }
 
     private void AttackBehavior() {
       timeSinceLastSawPlayer = 0;
       fighter.Attack(player);
+
+      AggrevateNearbyEnemies();
+    }
+
+    private void AggrevateNearbyEnemies() {
+      RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+      foreach(RaycastHit hit in hits) {
+        AIController enemy = hit.collider.GetComponent<AIController>();
+        if (enemy == null) continue;
+        enemy.Aggrevate();
+      }
     }
 
     private void SuspicionBehavior() {
