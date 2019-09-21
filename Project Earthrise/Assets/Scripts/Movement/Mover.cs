@@ -116,7 +116,6 @@ namespace RPG.Movement {
 
     private bool DoneRotating(Vector3 newForward) {
       Vector3 normalizedPlayerForward = transform.forward.normalized;
-      Ray playerRotationRay = new Ray(transform.position, normalizedPlayerForward);
       Vector3 normalizedCameraForward = new Vector3(newForward.x, 0, newForward.z).normalized;
       return Vector3.Distance(normalizedPlayerForward, normalizedCameraForward) < 0.01f;
     }
