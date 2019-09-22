@@ -28,6 +28,7 @@ namespace RPG.Control {
     private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
     private float timeSinceLastSawPlayer = Mathf.Infinity;
     private float timeSinceAggrevated = Mathf.Infinity;
+    private bool wasAggrevated = false;
 
     private void Awake() {
       actionScheduler = GetComponent<ActionScheduler>();
@@ -49,7 +50,11 @@ namespace RPG.Control {
     private void Update() {
       if (health.IsDead()) return;
 
-      if (IsAggrevated() && fighter.CanAttack(player)) {
+      bool isAggrevated = IsAggrevated();
+      if (isAggrevated && !wasAggrevated) {
+        AggrevateNearbyEnemies();
+      }
+      if (isAggrevated && fighter.CanAttack(player)) {
         AttackBehavior();
       } else if (timeSinceLastSawPlayer <= suspicionTime) {
         SuspicionBehavior();
@@ -58,6 +63,7 @@ namespace RPG.Control {
       }
 
       UpdateTimers();
+      wasAggrevated = isAggrevated;
     }
 
     public void Aggrevate() {
@@ -72,15 +78,13 @@ namespace RPG.Control {
     private void AttackBehavior() {
       timeSinceLastSawPlayer = 0;
       fighter.Attack(player);
-
-      AggrevateNearbyEnemies();
     }
 
     private void AggrevateNearbyEnemies() {
       RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
-      foreach(RaycastHit hit in hits) {
+      foreach (RaycastHit hit in hits) {
         AIController enemy = hit.collider.GetComponent<AIController>();
-        if (enemy == null) continue;
+        if (enemy == null || enemy == this) continue;
         enemy.Aggrevate();
       }
     }
