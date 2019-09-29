@@ -6,19 +6,45 @@ using UnityEngine;
 namespace RPG.Control {
   public class PlayerController : MonoBehaviour {
 
+    [SerializeField] private CanvasGroup pauseOverlay;
+    [SerializeField] private GameObject pausePanel;
     private Health playerHealth;
 
     private void Awake() {
       playerHealth = GetComponent<Health>();
-      Cursor.visible = false;
+      UnpauseGame();
     }
 
     void Update() {
-      InteractWithMovement();
+      InteractWithPauseMenu();
+      if (pausePanel.activeInHierarchy) return;
 
-      if (Input.GetMouseButtonDown(0)) {
-        GetComponent<Fighter>().Attack();
+      InteractWithMovement();
+      InteractWithCombat();
+    }
+
+    private void InteractWithPauseMenu() {
+      if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (pausePanel.activeInHierarchy == false) {
+          PauseGame();
+        } else {
+          UnpauseGame();
+        }
       }
+    }
+
+    private void PauseGame() {
+      Time.timeScale = 0f;
+      pauseOverlay.alpha = 1f;
+      pausePanel.SetActive(true);
+      Cursor.visible = true;
+    }
+
+    public void UnpauseGame() {
+      Time.timeScale = 1f;
+      pauseOverlay.alpha = 0f;
+      pausePanel.SetActive(false);
+      Cursor.visible = false;
     }
 
     private void InteractWithMovement() {
@@ -47,6 +73,12 @@ namespace RPG.Control {
       }
       if (movementTarget != Vector3.zero) {
         GetComponent<Mover>().MoveInDirection(movementTarget, speed);
+      }
+    }
+
+    private void InteractWithCombat() {
+      if (Input.GetMouseButtonDown(0)) {
+        GetComponent<Fighter>().Attack();
       }
     }
   }
