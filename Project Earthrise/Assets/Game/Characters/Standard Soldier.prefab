@@ -32,6 +32,8 @@ MonoBehaviour:
   patrolPath: {fileID: 0}
   waypointTolerance: 1
   waypointDwellTime: 3
+  aggroCooldownTime: 5
+  shoutDistance: 5
 --- !u!114 &8032115416210075413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +128,26 @@ PrefabInstance:
       propertyPath: characterName
       value: 
       objectReference: {fileID: 3914794092915609667}
+    - target: {fileID: 8379669519843708440, guid: 2f0abc3a509bc2940b571244d05631fd,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379669519843708440, guid: 2f0abc3a509bc2940b571244d05631fd,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322447911062958562, guid: 2f0abc3a509bc2940b571244d05631fd,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8322447911062958562, guid: 2f0abc3a509bc2940b571244d05631fd,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f0abc3a509bc2940b571244d05631fd, type: 3}
 --- !u!1001 &1010281193623784844

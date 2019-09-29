@@ -11,7 +11,7 @@ namespace RPG.Attributes {
     }
 
     private void Update() {
-      GetComponent<Image>().fillAmount = energy.GetFraction();
+      transform.localScale = new Vector3(energy.GetFraction(), 1, 1);
     }
   }
 }

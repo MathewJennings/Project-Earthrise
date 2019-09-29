@@ -1,11 +1,11 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace RPG.UI {
   public class LevelUpText : MonoBehaviour {
 
-    [SerializeField] Text levelUpText;
+    [SerializeField] TextMeshProUGUI levelUpText;
 
     public void SetValue(int level) {
       levelUpText.text = String.Format("Level {0}", level);

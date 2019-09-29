@@ -1,11 +1,11 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace RPG.UI {
   public class DamageText : MonoBehaviour {
 
-    [SerializeField] Text damageText;
+    [SerializeField] TextMeshProUGUI damageText;
 
     public void SetValue(float damageAmount) {
       damageText.text = String.Format("{0:0}", damageAmount);
