@@ -1,4 +1,5 @@
-﻿using RPG.Attributes;
+﻿using System;
+using RPG.Attributes;
 using RPG.Combat;
 using RPG.Movement;
 using UnityEngine;
@@ -19,7 +20,8 @@ namespace RPG.Control {
       InteractWithPauseMenu();
       if (pausePanel.activeInHierarchy) return;
 
-      InteractWithMovement();
+      InteractWithJump();
+      InteractWithLocomotion();
       InteractWithCombat();
     }
 
@@ -47,7 +49,13 @@ namespace RPG.Control {
       Cursor.visible = false;
     }
 
-    private void InteractWithMovement() {
+    private void InteractWithJump() {
+      if (Input.GetKeyDown(KeyCode.Space)) {
+        GetComponent<Mover>().Jump();
+      }
+    }
+
+    private void InteractWithLocomotion() {
       Vector3 movementTarget = Vector3.zero;
       float speed = 1f;
       if (Input.GetKey(KeyCode.W)) {

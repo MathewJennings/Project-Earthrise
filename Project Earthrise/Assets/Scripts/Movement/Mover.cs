@@ -66,6 +66,15 @@ namespace RPG.Movement {
       navMeshAgent.isStopped = false;
     }
 
+    public void Jump() {
+      GetComponent<Animator>().SetTrigger("jump");
+    }
+
+    // Animation Event
+    private void Land() {
+      GetComponent<Animator>().SetTrigger("land");
+    }
+
     public IEnumerator RotateAsynchronously(Vector3 newForward) {
       float elapsedRotationTime = 0f;
       while (!DoneRotating(newForward)) {
