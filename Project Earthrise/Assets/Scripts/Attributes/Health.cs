@@ -9,7 +9,7 @@ namespace RPG.Attributes {
   public class Health : MonoBehaviour, ISaveable {
 
     [SerializeField] float regenerationPercentage = 70f;
-    [SerializeField] UnityEvent onDie;
+    [SerializeField] public UnityEvent onDie;
     [SerializeField] public TakeDamageEvent takeDamageUnityEvent;
     [System.Serializable]
     public class TakeDamageEvent : UnityEvent<float> { }
@@ -61,7 +61,6 @@ namespace RPG.Attributes {
       healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
       takeDamageUnityEvent.Invoke(damage);
       if (healthPoints.value == 0 && !isDead) {
-        onDie.Invoke();
         Die();
         AwardExperience(instigator);
       }
@@ -108,6 +107,7 @@ namespace RPG.Attributes {
       isDead = true;
       GetComponent<Animator>().SetTrigger("die");
       GetComponent<ActionScheduler>().CancelCurrentAction();
+      onDie.Invoke();
     }
 
     private void Revive() {

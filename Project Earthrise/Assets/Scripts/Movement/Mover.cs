@@ -27,8 +27,15 @@ namespace RPG.Movement {
       energy = GetComponent<Energy>();
     }
 
+    private void OnEnable() {
+      health.onDie.AddListener(DisableNavMeshAgent);
+    }
+
+    private void OnDisable() {
+      health.onDie.RemoveListener(DisableNavMeshAgent);
+    }
+
     private void Update() {
-      navMeshAgent.enabled = !health.IsDead();
       UpdateAnimator();
     }
 
@@ -61,18 +68,15 @@ namespace RPG.Movement {
           speedFraction = 1;
         }
       }
-      navMeshAgent.destination = transform.position + direction;
-      navMeshAgent.speed = maxSpeed * Mathf.Max(0, speedFraction);
-      navMeshAgent.isStopped = false;
-    }
-
-    public void Jump() {
-      GetComponent<Animator>().SetTrigger("jump");
-    }
-
-    // Animation Event
-    private void Land() {
-      GetComponent<Animator>().SetTrigger("land");
+      if (GetComponent<Jumper>().IsJumping()) {
+        // NavMeshAgent is disabled when jumping
+        transform.LookAt(transform.position + direction);
+        transform.position += direction.normalized * Time.deltaTime * maxSpeed * Mathf.Max(0, speedFraction);
+      } else {
+        navMeshAgent.destination = transform.position + direction;
+        navMeshAgent.speed = maxSpeed * Mathf.Max(0, speedFraction);
+        navMeshAgent.isStopped = false;
+      }
     }
 
     public IEnumerator RotateAsynchronously(Vector3 newForward) {
@@ -127,6 +131,10 @@ namespace RPG.Movement {
       Vector3 normalizedPlayerForward = transform.forward.normalized;
       Vector3 normalizedCameraForward = new Vector3(newForward.x, 0, newForward.z).normalized;
       return Vector3.Distance(normalizedPlayerForward, normalizedCameraForward) < 0.01f;
+    }
+
+    private void DisableNavMeshAgent() {
+      navMeshAgent.enabled = false;
     }
   }
 }

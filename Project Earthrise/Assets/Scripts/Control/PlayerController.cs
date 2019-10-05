@@ -20,8 +20,7 @@ namespace RPG.Control {
       InteractWithPauseMenu();
       if (pausePanel.activeInHierarchy) return;
 
-      InteractWithJump();
-      InteractWithLocomotion();
+      InteractWithMovement();
       InteractWithCombat();
     }
 
@@ -49,13 +48,7 @@ namespace RPG.Control {
       Cursor.visible = false;
     }
 
-    private void InteractWithJump() {
-      if (Input.GetKeyDown(KeyCode.Space)) {
-        GetComponent<Mover>().Jump();
-      }
-    }
-
-    private void InteractWithLocomotion() {
+    private void InteractWithMovement() {
       Vector3 movementTarget = Vector3.zero;
       float speed = 1f;
       if (Input.GetKey(KeyCode.W)) {
@@ -76,11 +69,16 @@ namespace RPG.Control {
       if (Input.GetKey(KeyCode.LeftShift)) {
         speed = 1.2f;
       }
-      if (Input.GetKeyUp(KeyCode.LeftShift)) {
-        GetComponent<Energy>().StopConsumingEnergy();
-      }
       if (movementTarget != Vector3.zero) {
         GetComponent<Mover>().MoveInDirection(movementTarget, speed);
+      }
+
+      if (Input.GetKeyDown(KeyCode.Space)) {
+        GetComponent<Jumper>().Jump();
+      }
+
+      if (Input.GetKeyUp(KeyCode.LeftShift)  || Input.GetKeyUp(KeyCode.Space)) {
+        GetComponent<Energy>().StopConsumingEnergy();
       }
     }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1473528428407065713}
   - component: {fileID: 6787548530678821753}
   - component: {fileID: 1473528428407065712}
+  - component: {fileID: 1134900032296901934}
   - component: {fileID: 326659638172287543}
   - component: {fileID: 3420033024116375140}
   - component: {fileID: 2491112542388812785}
@@ -147,6 +148,25 @@ MonoBehaviour:
   maxSpeed: 6
   rotationSpeed: 2
   maxRotationTime: 0.5
+  energyToSprint: 0.1
+  maxNavMeshProjectionDistance: 1
+  maxNavPathLength: 40
+--- !u!114 &1134900032296901934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473528428407065711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd2174923a9ffc43b26305ff97c85a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeight: 1.6
+  jumpAirTime: 0.8
+  energyToJump: 10
+  maxNavMeshSamplingDistance: 1
 --- !u!114 &326659638172287543
 MonoBehaviour:
   m_ObjectHideFlags: 0
