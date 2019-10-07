@@ -61,8 +61,10 @@ GameObject:
   m_Component:
   - component: {fileID: 180989010002921187}
   - component: {fileID: 180989010002921186}
+  - component: {fileID: 3740424174242008643}
+  - component: {fileID: 773673028807696588}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,6 +122,34 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &3740424174242008643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180989010002921185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: Sun
+--- !u!114 &773673028807696588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180989010002921185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6f52883b372c14d8e6e991c23ea04d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lengthOfDay: 960
+  noonTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  midnightTint: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
 --- !u!1 &4901552630356029352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,37 +1184,37 @@ PrefabInstance:
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.4185486
+      value: 39.677605
       objectReference: {fileID: 0}
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 12.211
       objectReference: {fileID: 0}
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.059118
+      value: 37.534195
       objectReference: {fileID: 0}
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.026441425
+      value: 0.060306195
       objectReference: {fileID: 0}
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.913957
+      value: 0.4002097
       objectReference: {fileID: 0}
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.06035152
+      value: -0.026404427
       objectReference: {fileID: 0}
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.4004262
+      value: 0.9140559
       objectReference: {fileID: 0}
     - target: {fileID: 8073303565536795150, guid: 261b83490c349b442b5cdaeaa5716957,
         type: 3}
