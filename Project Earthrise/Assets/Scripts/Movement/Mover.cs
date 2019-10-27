@@ -20,6 +20,7 @@ namespace RPG.Movement {
     private NavMeshAgent navMeshAgent;
     private Health health;
     private Energy energy;
+    private float elapsedRotationTime;
 
     private void Awake() {
       navMeshAgent = GetComponent<NavMeshAgent>();
@@ -70,8 +71,10 @@ namespace RPG.Movement {
       }
       if (GetComponent<Jumper>().IsJumping()) {
         // NavMeshAgent is disabled when jumping
-        transform.LookAt(transform.position + direction);
         transform.position += direction.normalized * Time.deltaTime * maxSpeed * Mathf.Max(0, speedFraction);
+        if (Mathf.Approximately(elapsedRotationTime, 0f)) {
+          StartCoroutine(RotateAsynchronously(direction));
+        }
       } else {
         navMeshAgent.destination = transform.position + direction;
         navMeshAgent.speed = maxSpeed * Mathf.Max(0, speedFraction);
@@ -80,13 +83,17 @@ namespace RPG.Movement {
     }
 
     public IEnumerator RotateAsynchronously(Vector3 newForward) {
-      float elapsedRotationTime = 0f;
+      print("ASYNC");
       while (!DoneRotating(newForward)) {
         elapsedRotationTime += rotationSpeed * Time.deltaTime;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(newForward), elapsedRotationTime);
-        if (elapsedRotationTime / rotationSpeed > maxRotationTime) yield break;
+        if (elapsedRotationTime / rotationSpeed > maxRotationTime) {
+          elapsedRotationTime = 0f;
+          yield break;
+        }
         yield return new WaitForEndOfFrame();
       }
+      elapsedRotationTime = 0f;
     }
 
     public void Cancel() {
@@ -129,8 +136,8 @@ namespace RPG.Movement {
 
     private bool DoneRotating(Vector3 newForward) {
       Vector3 normalizedPlayerForward = transform.forward.normalized;
-      Vector3 normalizedCameraForward = new Vector3(newForward.x, 0, newForward.z).normalized;
-      return Vector3.Distance(normalizedPlayerForward, normalizedCameraForward) < 0.01f;
+      Vector3 normalizedNewForward = new Vector3(newForward.x, 0, newForward.z).normalized;
+      return Vector3.Distance(normalizedPlayerForward, normalizedNewForward) < 0.01f;
     }
 
     private void DisableNavMeshAgent() {

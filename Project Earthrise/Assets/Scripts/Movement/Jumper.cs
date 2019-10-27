@@ -58,7 +58,7 @@ namespace RPG.Movement {
 
     private bool ShouldLand(float normalizedJumpTime) {
       Vector3 potentialLandingPosition = RaycastNavMesh();
-      return normalizedJumpTime > 1 || (normalizedJumpTime > 0.1f && Vector3.Distance(transform.position, potentialLandingPosition) < 0.01f);
+      return normalizedJumpTime > 1 || (normalizedJumpTime > 0.5f && Vector3.Distance(transform.position, potentialLandingPosition) < 0.01f);
     }
 
     private Vector3 RaycastNavMesh() {
