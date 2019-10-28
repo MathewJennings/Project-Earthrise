@@ -20,11 +20,13 @@ namespace RPG.Movement {
     private bool isJumping;
     private float jumpStartTime;
     private float jumpStartHeight;
+    private bool isColliding;
 
     private void Awake() {
       navMeshAgent = GetComponent<NavMeshAgent>();
       energy = GetComponent<Energy>();
     }
+
     private void Update() {
       if (!isJumping) return;
 
@@ -33,6 +35,14 @@ namespace RPG.Movement {
       if (ShouldLand(normalizedJumpTime)) {
         Land();
       }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+      isColliding = true;
+    }
+
+    private void OnTriggerExit(Collider other) {
+      isColliding = false;
     }
 
     public bool IsJumping() {
@@ -54,6 +64,15 @@ namespace RPG.Movement {
 
     public void Cancel() {
       // Let the Jump finish naturally
+    }
+
+    public void MoveWhileJumping(Vector3 direction, float speed, float elapsedRotationTime) {
+      if (!isColliding) {
+        transform.position += direction.normalized * Time.deltaTime * speed;
+      }
+      if (Mathf.Approximately(elapsedRotationTime, 0f)) {
+        StartCoroutine(GetComponent<Mover>().RotateAsynchronously(direction));
+      }
     }
 
     private bool ShouldLand(float normalizedJumpTime) {

@@ -71,10 +71,7 @@ namespace RPG.Movement {
       }
       if (GetComponent<Jumper>().IsJumping()) {
         // NavMeshAgent is disabled when jumping
-        transform.position += direction.normalized * Time.deltaTime * maxSpeed * Mathf.Max(0, speedFraction);
-        if (Mathf.Approximately(elapsedRotationTime, 0f)) {
-          StartCoroutine(RotateAsynchronously(direction));
-        }
+        GetComponent<Jumper>().MoveWhileJumping(direction, maxSpeed * Mathf.Max(0, speedFraction), elapsedRotationTime);
       } else {
         navMeshAgent.destination = transform.position + direction;
         navMeshAgent.speed = maxSpeed * Mathf.Max(0, speedFraction);
@@ -83,7 +80,6 @@ namespace RPG.Movement {
     }
 
     public IEnumerator RotateAsynchronously(Vector3 newForward) {
-      print("ASYNC");
       while (!DoneRotating(newForward)) {
         elapsedRotationTime += rotationSpeed * Time.deltaTime;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(newForward), elapsedRotationTime);
