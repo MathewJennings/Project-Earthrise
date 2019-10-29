@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3341262}
   - component: {fileID: 2326786}
   - component: {fileID: 6489280}
-  - component: {fileID: 3828228749194241736}
   m_Layer: 0
   m_Name: Tent
   m_TagString: Untagged
@@ -93,16 +92,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 2c58a0598ecc8c24db8015373dafed1e, type: 3}
---- !u!65 &3828228749194241736
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139692}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.1995354, y: 1.7711159, z: 2.8344631}
-  m_Center: {x: 0.000000006403095, y: 0.66176075, z: 1.1731251}

@@ -10,8 +10,7 @@ namespace RPG.Movement {
    */
   public class Jumper : MonoBehaviour, IAction {
 
-    [SerializeField] float jumpHeight = 1.6f;
-    [SerializeField] float jumpAirTime = 0.8f;
+    [SerializeField] float jumpStrength = 7f;
     [SerializeField] float energyToJump = 10f;
     [SerializeField] float navMeshSamplingTolerance = 1f;
 
@@ -19,8 +18,7 @@ namespace RPG.Movement {
     private Energy energy;
     private bool isJumping;
     private float jumpStartTime;
-    private float jumpStartHeight;
-    private bool isColliding;
+    private Vector3 jumpStartPosition;
 
     private void Awake() {
       navMeshAgent = GetComponent<NavMeshAgent>();
@@ -30,19 +28,20 @@ namespace RPG.Movement {
     private void Update() {
       if (!isJumping) return;
 
-      float normalizedJumpTime = (Time.time - jumpStartTime) / jumpAirTime;
-      transform.position = new Vector3(transform.position.x, jumpStartHeight + jumpHeight * Mathf.Sin(Mathf.PI * normalizedJumpTime), transform.position.z);
-      if (ShouldLand(normalizedJumpTime)) {
+      float timeJumping = Time.time - jumpStartTime;
+      if (timeJumping == 0f) {
+        // Boost off of the ground
+        transform.Translate(0, 0.2f, 0);
+      } else if (timeJumping < 0.8f) {
+        // Arc up and down
+        transform.Translate(0, jumpStrength * Time.deltaTime * Mathf.Cos(Mathf.PI * timeJumping / 0.8f), 0);
+      } else {
+        // Fall rapidly
+        transform.Translate(0, jumpStrength * Time.deltaTime * -15 * (timeJumping - 0.8f), 0);
+      }
+      if (timeJumping > 0.5f && NearGround()) {
         Land();
       }
-    }
-
-    private void OnTriggerEnter(Collider other) {
-      isColliding = true;
-    }
-
-    private void OnTriggerExit(Collider other) {
-      isColliding = false;
     }
 
     public bool IsJumping() {
@@ -58,7 +57,7 @@ namespace RPG.Movement {
       navMeshAgent.enabled = false;
       isJumping = true;
       jumpStartTime = Time.time;
-      jumpStartHeight = transform.position.y;
+      jumpStartPosition = transform.position;
       GetComponent<Animator>().SetTrigger("jump");
     }
 
@@ -67,17 +66,14 @@ namespace RPG.Movement {
     }
 
     public void MoveWhileJumping(Vector3 direction, float speed, float elapsedRotationTime) {
-      if (!isColliding) {
-        transform.position += direction.normalized * Time.deltaTime * speed;
-      }
+      transform.position += direction.normalized * Time.deltaTime * speed;
       if (Mathf.Approximately(elapsedRotationTime, 0f)) {
         StartCoroutine(GetComponent<Mover>().RotateAsynchronously(direction));
       }
     }
 
-    private bool ShouldLand(float normalizedJumpTime) {
-      Vector3 potentialLandingPosition = RaycastNavMesh();
-      return normalizedJumpTime > 1 || (normalizedJumpTime > 0.5f && Vector3.Distance(transform.position, potentialLandingPosition) < 0.01f);
+    private bool NearGround() {
+      return Vector3.Distance(transform.position, RaycastNavMesh()) < 0.02f;
     }
 
     private Vector3 RaycastNavMesh() {
@@ -93,7 +89,7 @@ namespace RPG.Movement {
       NavMeshHit navMeshHit;
       bool hasCastToNavMesh = NavMesh.SamplePosition(
         hits[hits.Length - 1].point, out navMeshHit, navMeshSamplingTolerance, NavMesh.AllAreas);
-      if (!hasCastToNavMesh) return transform.position;
+      if (!hasCastToNavMesh) { print("MISS"); return transform.position; }
 
       return navMeshHit.position;
     }

@@ -163,10 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd2174923a9ffc43b26305ff97c85a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 1.6
-  jumpAirTime: 0.8
+  jumpStrength: 7
   energyToJump: 10
-  maxNavMeshSamplingDistance: 1
+  navMeshSamplingTolerance: 1
 --- !u!114 &326659638172287543
 MonoBehaviour:
   m_ObjectHideFlags: 0
