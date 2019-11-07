@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6842829920398648542}
   - component: {fileID: 6842829920401491612}
   - component: {fileID: 6842829920400657274}
+  - component: {fileID: 3299110808957236830}
   m_Layer: 0
   m_Name: SM_Env_Rock_016
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &3299110808957236830
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6842829920398444856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.479678, y: 0.32877427, z: 0.564048}
+  m_Center: {x: 9.1858476e-10, y: 0.16438714, z: -0.000000001148231}

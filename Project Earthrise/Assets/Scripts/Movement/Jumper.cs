@@ -10,38 +10,34 @@ namespace RPG.Movement {
    */
   public class Jumper : MonoBehaviour, IAction {
 
-    [SerializeField] float jumpStrength = 7f;
+    [SerializeField] float jumpForce = 700f;
+    [SerializeField] float initialBoost = 0.3f;
     [SerializeField] float energyToJump = 10f;
     [SerializeField] float navMeshSamplingTolerance = 1f;
 
     private NavMeshAgent navMeshAgent;
+    private Rigidbody rbody;
     private Energy energy;
     private bool isJumping;
-    private float jumpStartTime;
-    private Vector3 jumpStartPosition;
+    private Vector3 cachedPosition;
 
     private void Awake() {
       navMeshAgent = GetComponent<NavMeshAgent>();
+      rbody = GetComponent<Rigidbody>();
       energy = GetComponent<Energy>();
     }
 
     private void Update() {
       if (!isJumping) return;
 
-      float timeJumping = Time.time - jumpStartTime;
-      if (timeJumping == 0f) {
-        // Boost off of the ground
-        transform.Translate(0, 0.2f, 0);
-      } else if (timeJumping < 0.8f) {
-        // Arc up and down
-        transform.Translate(0, jumpStrength * Time.deltaTime * Mathf.Cos(Mathf.PI * timeJumping / 0.8f), 0);
-      } else {
-        // Fall rapidly
-        transform.Translate(0, jumpStrength * Time.deltaTime * -15 * (timeJumping - 0.8f), 0);
+      if (transform.position == cachedPosition) {
+        GetComponent<Animator>().SetTrigger("land");
       }
-      if (timeJumping > 0.5f && NearGround()) {
+
+      if (NearGround()) {
         Land();
       }
+      cachedPosition = transform.position;
     }
 
     public bool IsJumping() {
@@ -55,9 +51,12 @@ namespace RPG.Movement {
       GetComponent<ActionScheduler>().StartAction(this);
       energy.ConsumeEnergy(energyToJump);
       navMeshAgent.enabled = false;
+      rbody.isKinematic = false;
+      rbody.useGravity = true;
+      cachedPosition = transform.position;
+      transform.Translate(0, initialBoost, 0);
+      rbody.AddForce(0, jumpForce, 0, ForceMode.Impulse);
       isJumping = true;
-      jumpStartTime = Time.time;
-      jumpStartPosition = transform.position;
       GetComponent<Animator>().SetTrigger("jump");
     }
 
@@ -70,15 +69,24 @@ namespace RPG.Movement {
       if (Mathf.Approximately(elapsedRotationTime, 0f)) {
         StartCoroutine(GetComponent<Mover>().RotateAsynchronously(direction));
       }
+
+      // If gliding up slopes, cancel the movement
+      if (rbody.velocity.y < 0 && transform.position.y > cachedPosition.y) {
+        print("CORRECTING");
+        // transform.position -= direction.normalized * Time.deltaTime * speed;
+      }
     }
 
     private bool NearGround() {
-      return Vector3.Distance(transform.position, RaycastNavMesh()) < 0.02f;
+      Vector3 raycastPosition = RaycastNavMesh();
+      if (raycastPosition.Equals(Vector3.zero)) return false;
+
+      return Vector3.Distance(transform.position, raycastPosition) < 0.1f;
     }
 
     private Vector3 RaycastNavMesh() {
       RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
-      if (hits.Length < 1) return transform.position;
+      if (hits.Length < 1) return Vector3.zero;
 
       float[] distances = new float[hits.Length];
       for (int i = 0; i < hits.Length; i++) {
@@ -89,13 +97,15 @@ namespace RPG.Movement {
       NavMeshHit navMeshHit;
       bool hasCastToNavMesh = NavMesh.SamplePosition(
         hits[hits.Length - 1].point, out navMeshHit, navMeshSamplingTolerance, NavMesh.AllAreas);
-      if (!hasCastToNavMesh) { print("MISS"); return transform.position; }
+      if (!hasCastToNavMesh) return Vector3.zero;
 
       return navMeshHit.position;
     }
 
     private void Land() {
       navMeshAgent.enabled = true;
+      rbody.isKinematic = true;
+      rbody.useGravity = false;
       isJumping = false;
       GetComponent<Animator>().SetTrigger("land");
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 443022}
   - component: {fileID: 3338814}
   - component: {fileID: 2314512}
+  - component: {fileID: 1489329954492850578}
   m_Layer: 0
   m_Name: SM_Env_TreeLog_01
   m_TagString: Untagged
@@ -77,3 +78,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1489329954492850578
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114594}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5739455, y: 0.8747713, z: 0.78919065}
+  m_Center: {x: -0.0000000065175536, y: 0.43738562, z: -0.00000059954186}

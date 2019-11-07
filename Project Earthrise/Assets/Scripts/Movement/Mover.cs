@@ -21,11 +21,13 @@ namespace RPG.Movement {
     private Health health;
     private Energy energy;
     private float elapsedRotationTime;
+    private Jumper jumper;
 
     private void Awake() {
       navMeshAgent = GetComponent<NavMeshAgent>();
       health = GetComponent<Health>();
       energy = GetComponent<Energy>();
+      jumper = GetComponent<Jumper>();
     }
 
     private void OnEnable() {
@@ -69,9 +71,8 @@ namespace RPG.Movement {
           speedFraction = 1;
         }
       }
-      if (GetComponent<Jumper>().IsJumping()) {
-        // NavMeshAgent is disabled when jumping
-        GetComponent<Jumper>().MoveWhileJumping(direction, maxSpeed * Mathf.Max(0, speedFraction), elapsedRotationTime);
+      if (jumper.IsJumping()) {
+        jumper.MoveWhileJumping(direction, maxSpeed * Mathf.Max(0, speedFraction), elapsedRotationTime);
       } else {
         navMeshAgent.destination = transform.position + direction;
         navMeshAgent.speed = maxSpeed * Mathf.Max(0, speedFraction);
@@ -124,9 +125,13 @@ namespace RPG.Movement {
     }
 
     private void UpdateAnimator() {
-      Vector3 velocity = navMeshAgent.velocity;
-      Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-      float speed = localVelocity.z;
+      Vector3 velocity;
+      if (jumper.IsJumping()) {
+        velocity = GetComponent<Rigidbody>().velocity * 100;
+      } else {
+        velocity = transform.InverseTransformDirection(navMeshAgent.velocity);
+      }
+      float speed = velocity.z;
       GetComponent<Animator>().SetFloat("forwardSpeed", speed);
     }
 
