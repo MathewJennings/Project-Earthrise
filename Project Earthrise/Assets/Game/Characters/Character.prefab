@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 700
+  initialBoost: 0.3
   energyToJump: 10
   navMeshSamplingTolerance: 1
 --- !u!114 &326659638172287543
@@ -283,7 +284,7 @@ MonoBehaviour:
   startingLevel: 1
   characterClass: 1
   progression: {fileID: 11400000, guid: 01e205a1a852c7f429c18f690db2a515, type: 2}
-  levelUpParticleEffect: {fileID: 0}
+  levelUpEffect: {fileID: 100000, guid: 8aeb031c05f7d704aa7e04a0b5babdeb, type: 3}
   shouldUseModifiers: 0
 --- !u!114 &4058052334272142799
 MonoBehaviour:
